@@ -1,7 +1,7 @@
 # Business glossary (sale)
 
 Shared definitions used across reports. Report-specific field definitions live in each report's
-`dictionary/data-dictionary.md`; this file holds cross-report business concepts.
+`data-dictionary.md`; this file holds cross-report business concepts.
 
 ## Company & Product
 
