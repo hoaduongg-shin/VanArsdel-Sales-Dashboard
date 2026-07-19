@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "d1a0c7cb59634821a64f",
   "position": {
-    "x": 420,
-    "y": 480,
+    "x": 651.37777777777774,
+    "y": 482.13333333333333,
     "z": 90,
-    "height": 200,
-    "width": 400,
+    "height": 199.11111111111111,
+    "width": 604.44444444444446,
     "tabOrder": 90
   },
   "visual": {
@@ -70,5 +70,51 @@
         }
       }
     }
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "c38e45725432b6ed0eca",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Product"
+              }
+            },
+            "Property": "Category"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "8b632b1e4c16d699bfe3",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Key Measures"
+              }
+            },
+            "Property": "Total Revenue"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "44f1d3ea6de599733244",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Key Measures"
+              }
+            },
+            "Property": "Budget Attainment %"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

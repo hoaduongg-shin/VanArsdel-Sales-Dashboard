@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "a7ee20676eab407ba37b",
   "position": {
-    "x": 24,
-    "y": 480,
+    "x": 24.177777777777777,
+    "y": 480.71111111111111,
     "z": 80,
-    "height": 200,
-    "width": 380,
+    "height": 199.11111111111111,
+    "width": 604.44444444444446,
     "tabOrder": 80
   },
   "visual": {
@@ -52,5 +52,37 @@
         }
       }
     }
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "f82efb615a790ab7361a",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "P&L Stage"
+              }
+            },
+            "Property": "Stage"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "2ddb3417bd8818a43e1d",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Key Measures"
+              }
+            },
+            "Property": "P&L Value"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }
