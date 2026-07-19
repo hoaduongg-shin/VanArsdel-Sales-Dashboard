@@ -35,8 +35,9 @@ The work follows a standard BA workflow. Each stage produced one document, and e
 | 6 | **brd.md** | Business Requirements Document — objectives, stakeholders, KPIs, business rules, scope. |
 | 7 | **report-spec.md** | Report specification — pages, KPI measures, grain, filters, interactivity, design notes. |
 | 8 | **wireframe.md** | Low-fidelity layout of the 3 pages, with X/Y axis annotations per visual. |
+| 9 | **pbip/BUILD-NOTES.md** | The built Power BI project — how to open, data-prep decisions, verified totals, limitations. |
 
-> Read 1 → 8 in order to follow the full reasoning from raw data to final design.
+> Read 1 → 8 to follow the reasoning from raw data to final design; see 9 and the `pbip/` folder for the implementation.
 
 ---
 
@@ -62,6 +63,37 @@ The work follows a standard BA workflow. Each stage produced one document, and e
 
 ---
 
+## Power BI build (`pbip/`)
+
+The dashboard is implemented as a **Power BI Project (PBIP)** — a file-based semantic model
+(TMDL) plus report (PBIR), built on the real dataset per `report-spec.md` and `wireframe.md`.
+
+- **`pbip/VanArsdel Sales.SemanticModel`** — star-schema model in TMDL: fact `Sales` +
+  dimensions, disconnected `BudgetForecast` and `P&L Stage`, and a `Key Measures` table
+  (~26 DAX measures). Reads the cleaned data in `pbip/data/`.
+- **`pbip/VanArsdel Sales.Report`** — 3-page PBIR report (theme `theme.json`), validated
+  with the `powerbi-report-author` CLI (0 errors).
+- **`pbip/data/`** — cleaned CSVs after the `data-quality.md` remediation (Date extended to
+  2015, 133 duplicate rows removed, surrogate `OrderID`, campaign values standardized,
+  Budget/Forecast unpivoted, New/Returning + customer tier derived).
+- **`pbip/BUILD-NOTES.md`** — how to open, decision log, and verified totals
+  (Revenue ≈ $65.5M · Gross Margin 27.0%).
+
+**Open it:** open `pbip/VanArsdel Sales.pbip` in Power BI Desktop (enable *Preview features →
+Power BI Project (.pbip) save format*), then **Refresh**.
+
+### Known limitations & how to improve
+
+| Limitation | Cause | How to improve |
+|---|---|---|
+| Budget Attainment & the Actual/Budget/Forecast trend are only meaningful for **Jan–Jun 2020** | Actuals end Jun-2020; Budget covers 2020–21; Forecast (2021) never overlaps Actuals | Obtain post-Jun-2020 Actuals and/or historical (2015–19) budgets to widen the comparable window |
+| **Rolling 13/12-month anchor** is approximated by the Date-range slicer | A true anchored rolling window needs a disconnected date/anchor parameter | Add a disconnected date table + rolling DAX measures driven by a selected anchor month |
+| **Top 10 Products** currently shows all products sorted by revenue | Measure-based Top-N can't be authored safely in raw PBIR | Apply a *Top N = 10 by Revenue* visual filter in Power BI Desktop |
+| **Drill-through** to a single-entity page is not built yet | Time-boxed first build | Add a Product/Region drill-through detail page |
+| Customer profitability tiering is near-even (weak VIP concentration) | Data appears **synthetic** (`data-quality.md` Q11) | Re-validate tiers once real customer-level data is available |
+
+---
+
 ## Repository contents
 
 | File | Type |
@@ -73,10 +105,14 @@ The work follows a standard BA workflow. Each stage produced one document, and e
 | `brd.md`, `report-spec.md`, `wireframe.md` | Requirements & design |
 | `theme.json` | Power BI report theme |
 | `dataset.rar` | Source data (Actuals + Budget/Forecast) |
+| `pbip/` | Power BI Project — TMDL semantic model, PBIR report, cleaned `data/`, `BUILD-NOTES.md` |
 
 ---
 
 ## Status
 
-Draft — pending stakeholder confirmation on the open items in `data-gap-questions.md`
-(revenue formula, historical/finer budgets, customer definition, and data currency/PII).
+**Build complete** — the PBIP (semantic model + 3-page report) is implemented on the real
+dataset and validates with 0 errors. Still **Draft**: pending stakeholder confirmation on the
+open items in `data-gap-questions.md` (revenue formula, historical/finer budgets, customer
+definition, data currency/PII) and the enhancements listed under
+[Power BI build → Known limitations](#known-limitations--how-to-improve).
