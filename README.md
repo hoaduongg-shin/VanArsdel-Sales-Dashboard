@@ -12,10 +12,10 @@ The work follows a standard BA workflow. Each stage produced one document, and e
 
 1. **Understand the data** — profile every table (structure, types, keys, relationships).
 2. **Assess quality** — evaluate the data against quality dimensions and log every issue.
-3. **Clarify gaps** — turn unknowns and blockers into questions for stakeholders.
-4. **Define requirements** — capture what the business needs (KPIs, questions, scope).
-5. **Specify & design the report** — pin down pages, KPIs, visuals, filters, then wireframe them.
-6. **Reference throughout** — a shared glossary and data dictionary keep terms and fields consistent.
+3. **Establish shared vocabulary** — define business terms (glossary) and every source field (data dictionary).
+4. **Clarify gaps** — turn unknowns and blockers into questions for stakeholders.
+5. **Define requirements** — capture what the business needs (KPIs, questions, scope).
+6. **Specify & design the report** — pin down pages, KPIs, visuals, filters, then wireframe them.
 
 **Source data:** `VanArsdel_Actuals.xlsx` (star schema — 1 fact `Sales` + 5 dimensions) and
 `VanArsdel_Budget_Forecast.xlsx` (planning data), packaged in `dataset.rar`.
@@ -29,14 +29,14 @@ The work follows a standard BA workflow. Each stage produced one document, and e
 | 0 | **README.md** | You are here — approach and reading order. |
 | 1 | **data-profile.md** | What the data looks like: tables, fields, types, cardinality, ranges, relationships. Descriptive, no judgement. |
 | 2 | **data-quality.md** | Issues found, rated by severity across quality dimensions, with evidence, impact, and remediation. |
-| 3 | **data-gap-questions.md** | Open items and blockers turned into questions for stakeholders. |
-| 4 | **brd.md** | Business Requirements Document — objectives, stakeholders, KPIs, business rules, scope. |
-| 5 | **report-spec.md** | Report specification — pages, KPI measures, grain, filters, interactivity, design notes. |
-| 6 | **wireframe.md** | Low-fidelity layout of the 3 pages, with X/Y axis annotations per visual. |
-| — | **business-glossary.md** | Shared business terms and definitions (reference, used throughout). |
-| — | **data-dictionary.md** | Field-level definitions of every source column (reference, used throughout). |
+| 3 | **business-glossary.md** | Shared business terms and their agreed definitions. |
+| 4 | **data-dictionary.md** | Field-level definitions of every source column. |
+| 5 | **data-gap-questions.md** | Open items and blockers turned into questions for stakeholders. |
+| 6 | **brd.md** | Business Requirements Document — objectives, stakeholders, KPIs, business rules, scope. |
+| 7 | **report-spec.md** | Report specification — pages, KPI measures, grain, filters, interactivity, design notes. |
+| 8 | **wireframe.md** | Low-fidelity layout of the 3 pages, with X/Y axis annotations per visual. |
 
-> Read 1 → 6 in order to follow the reasoning. Use the glossary and data dictionary as reference at any point.
+> Read 1 → 8 in order to follow the full reasoning from raw data to final design.
 
 ---
 
@@ -67,9 +67,10 @@ The work follows a standard BA workflow. Each stage produced one document, and e
 | File | Type |
 |------|------|
 | `README.md` | This overview |
-| `data-profile.md`, `data-quality.md`, `data-gap-questions.md` | Data understanding & quality |
+| `data-profile.md`, `data-quality.md` | Data understanding & quality |
+| `business-glossary.md`, `data-dictionary.md` | Reference definitions |
+| `data-gap-questions.md` | Stakeholder questions |
 | `brd.md`, `report-spec.md`, `wireframe.md` | Requirements & design |
-| `business-glossary.md`, `data-dictionary.md` | Reference |
 | `theme.json` | Power BI report theme |
 | `dataset.rar` | Source data (Actuals + Budget/Forecast) |
 
