@@ -49,8 +49,7 @@ Low-fidelity layout for the three-page dashboard. Each visual is annotated with 
 │   (restricted to the comparable period — 2020)                               │
 └──────────────────────────────────────────────────────────────────────────────┘
 ```
-Notes: Actual = solid, Budget/Forecast = dashed — never blended into one series. Region is not a
-filter here (Budget has no Region, would break Attainment). Chart (2) is Actual-only (Budget has no cost).
+Notes: Actual = solid, Budget/Forecast = dashed — never blended into one series.
 
 ---
 
@@ -82,7 +81,6 @@ filter here (Budget has no Region, would break Attainment). Chart (2) is Actual-
 │     (tie-break: Units, name)    │                                           │
 └─────────────────────────────────┴───────────────────────────────────────────┘
 ```
-Layout: detail matrix on one half, the two bar charts stacked on the other half.
 
 ---
 
@@ -113,8 +111,6 @@ Layout: detail matrix on one half, the two bar charts stacked on the other half.
 │     (counted per Segment bought)  │     X: tier · Y: % of Gross Profit     │
 └───────────────────────────────────┴────────────────────────────────────────┘
 ```
-Notes: Device is a filter, not a chart. A customer who buys multiple Segments is counted in each.
-Jan-2015 shows an artificial "new customers" spike (no pre-2015 history) — footnote it, do not remove.
 
 ---
 
