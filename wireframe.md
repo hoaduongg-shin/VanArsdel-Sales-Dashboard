@@ -121,7 +121,7 @@ Notes: Actual = solid, Budget/Forecast = dashed — never blended into one serie
 - **Formatting:** USD labelled on monetary visuals; percentages 1 decimal; Actual = solid, Budget/Forecast = dashed.
 
 ## Related documents
-- Business Requirements Document (`VanArsdel_BRD.md`)
-- Report Spec (`VanArsdel_Report_Spec.md`)
-- Data Profiling Report (`VanArsdel_Data_Profiling.md`)
-- Data Quality Assessment (`VanArsdel_Data_Quality.md`)
+- Business Requirements Document (`brd.md`)
+- Report Spec (`report-spec.md`)
+- Data Profiling Report (`data-profiling.md`)
+- Data Quality Assessment (`data-quality.md`)
