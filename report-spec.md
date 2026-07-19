@@ -106,7 +106,7 @@ Notes: Device is a filter, not a chart. Customers-by-Segment counts a customer i
 - Export: enabled, subject to user role permissions (apply Power BI workspace-level role security, not a data model concern).
 
 ## Design notes
-- Theme `shared/themes/datapot-theme.json` (registered). Page 1280×720. Format via theme, not per-visual.
+- Theme `theme.json` (registered). Page 1280×720. Format via theme, not per-visual.
 - Currency: USD, explicit label on every monetary visual.
 - Percentages: 1 decimal place. Numbers: thousands separator.
 - Color meaning: positive variance/growth = positive indicator color; negative = warning indicator color — consistent across all pages.
