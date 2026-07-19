@@ -15,7 +15,7 @@ VanArsdel stores sales, product, customer, marketing, and planning data across m
 Business users need a single dashboard to:
 
 - Monitor sales performance over time.
-- Compare actual performance against business plans (Budget) where comparable data exists.
+- Compare actual performance against business plans (Budget/Forcast).
 - Identify high- and low-performing products, regions, and marketing channels.
 - Understand which marketing channels contribute the most revenue and customer acquisition.
 - Track customer growth, repeat-purchase behavior, and customer profitability.
