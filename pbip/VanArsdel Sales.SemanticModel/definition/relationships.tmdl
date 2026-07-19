@@ -1,0 +1,20 @@
+relationship a0d70ac3-2831-40d7-bd20-b9bc6d97aa85
+	fromColumn: Sales.'Product ID'
+	toColumn: Product.'Product ID'
+
+relationship c00fde4a-8464-4cdd-ac98-f27f4294a0be
+	fromColumn: Sales.'Customer ID'
+	toColumn: Customer.'Customer ID'
+
+relationship bb01d00e-ac11-49bf-a067-6ad4aaee2b28
+	fromColumn: Sales.'Campaign ID'
+	toColumn: Campaign.'Campaign ID'
+
+relationship 5ed724fa-2c4a-4d0a-93c1-165c922cbc9c
+	fromColumn: Sales.Date
+	toColumn: Date.Date
+
+relationship 59ea19c6-90ac-4e5f-84e6-f6bc60263117
+	fromColumn: Customer.'Zip Code'
+	toColumn: Geo.Zip
+

@@ -1,0 +1,5 @@
+expression DataFolder = "C:\Users\admin\Downloads\VanArsdel-Sales-Dashboard-main\VanArsdel-Sales-Dashboard-main\pbip\data\" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: dcd20e10-454d-45a0-ba06-4f275dd853c5
+
+	annotation PBI_ResultType = Text
+

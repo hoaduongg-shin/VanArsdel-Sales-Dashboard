@@ -1,0 +1,74 @@
+table Product
+	lineageTag: 4435808a-c9d3-4f08-8917-eb9a27b28e83
+
+	column 'Product ID'
+		dataType: string
+		isHidden
+		isKey
+		lineageTag: db2b313f-f3fc-46cc-a9f9-e26b1b92ef34
+		summarizeBy: none
+		sourceColumn: ProductID
+
+	column Product
+		dataType: string
+		lineageTag: 06efe800-0519-46ce-8e2a-73f0d58ef9e7
+		summarizeBy: none
+		sourceColumn: Product
+
+	column Category
+		dataType: string
+		lineageTag: 59d4d058-4067-41da-9f78-c74514a8ecb6
+		summarizeBy: none
+		sourceColumn: Category
+
+	column Segment
+		dataType: string
+		lineageTag: b197a95b-d348-4945-9c3a-3e91ac592c71
+		summarizeBy: none
+		sourceColumn: Segment
+
+	column 'Manufacturer ID'
+		dataType: string
+		isHidden
+		lineageTag: a75e648a-5768-4597-816a-1a7cafe569d9
+		summarizeBy: none
+		sourceColumn: ManufacturerID
+
+	column Manufacturer
+		dataType: string
+		isHidden
+		lineageTag: efe621aa-0362-4829-84c1-26f1a36fe3d5
+		summarizeBy: none
+		sourceColumn: Manufacturer
+
+	column 'Unit Cost'
+		dataType: double
+		formatString: \$#,0.00
+		lineageTag: fe5c99ea-4e9a-4d59-bd0a-b84759951304
+		summarizeBy: none
+		sourceColumn: Unit Cost
+
+	column 'Unit Price'
+		dataType: double
+		formatString: \$#,0.00
+		lineageTag: 9a1bad7e-0045-459c-bdd6-a7e8f7e0b7dc
+		summarizeBy: none
+		sourceColumn: Unit Price
+
+	column Category-Segment
+		dataType: string
+		isHidden
+		lineageTag: 9ef87707-c017-4257-a823-bbfd7ec040a1
+		summarizeBy: none
+		sourceColumn: Category-Segment
+
+	partition Product = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "Product.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"ProductID", type text}, {"Product", type text}, {"Category", type text}, {"Segment", type text}, {"ManufacturerID", type text}, {"Manufacturer", type text}, {"Unit Cost", type number}, {"Unit Price", type number}, {"Category-Segment", type text}})
+				in
+				    Typed
+

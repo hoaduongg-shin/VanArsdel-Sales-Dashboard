@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "VanArsdel Sales"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "f7c4a2fd-ea47-4ff5-a565-0171fbc54a63"
+  }
+}

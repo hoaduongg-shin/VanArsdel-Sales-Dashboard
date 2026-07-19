@@ -1,0 +1,17 @@
+table 'P&L Stage'
+	lineageTag: 18ed6cc9-c7f9-483d-b47d-6ee3818ae526
+
+	column Stage
+		lineageTag: c5857a5c-3e89-43bd-aece-1004c385bb3d
+		isNameInferred
+		sourceColumn: [Stage]
+
+	column 'Stage Order'
+		lineageTag: b59f006b-7110-466c-80d3-47f11e93c51e
+		isNameInferred
+		sourceColumn: [Stage Order]
+
+	partition 'P&L Stage' = calculated
+		mode: import
+		source = DATATABLE("Stage", STRING, "Stage Order", INTEGER, {{"Revenue",1},{"COGS",2},{"Gross Profit",3}})
+

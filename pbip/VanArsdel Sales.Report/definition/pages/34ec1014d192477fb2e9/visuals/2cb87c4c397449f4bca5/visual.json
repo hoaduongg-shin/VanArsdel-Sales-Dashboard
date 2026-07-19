@@ -1,0 +1,56 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "2cb87c4c397449f4bca5",
+  "position": {
+    "x": 652,
+    "y": 480,
+    "z": 90,
+    "height": 170,
+    "width": 604,
+    "tabOrder": 90
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Customer"
+                    }
+                  },
+                  "Property": "Customer Tier"
+                }
+              },
+              "queryRef": "Customer.Customer Tier",
+              "nativeQueryRef": "Customer Tier",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Key Measures"
+                    }
+                  },
+                  "Property": "% Gross Profit by Tier"
+                }
+              },
+              "queryRef": "Key Measures.% Gross Profit by Tier",
+              "nativeQueryRef": "% Gross Profit by Tier"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+table Campaign
+	lineageTag: 0b21d7e3-634c-4a32-8ad5-9d8a4e2d8e0b
+
+	column 'Campaign ID'
+		dataType: int64
+		isHidden
+		isKey
+		lineageTag: 9d671274-2034-4067-8d8b-74227c66889c
+		summarizeBy: none
+		sourceColumn: CampaignID
+
+	column 'Traffic Channel'
+		dataType: string
+		lineageTag: 40208bf5-b40d-4d29-b19a-be6b5c95aa78
+		summarizeBy: none
+		sourceColumn: TrafficChannel
+
+	column Device
+		dataType: string
+		lineageTag: e6958446-c3b8-45da-9e39-52a70dafb045
+		summarizeBy: none
+		sourceColumn: Device
+
+	partition Campaign = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "Campaign.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"CampaignID", Int64.Type}, {"TrafficChannel", type text}, {"Device", type text}})
+				in
+				    Typed
+

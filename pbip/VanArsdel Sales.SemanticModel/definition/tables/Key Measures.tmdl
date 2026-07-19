@@ -1,0 +1,164 @@
+table 'Key Measures'
+	lineageTag: d2a22a4b-ed6d-45e3-a26f-d8ce9d9decad
+
+	measure 'Total Revenue' = SUMX ( Sales, Sales[Units] * RELATED ( Product[Unit Price] ) )
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: 01 Volume & Revenue
+		lineageTag: 7271ce10-1f1c-43ad-a70a-1a493fb56065
+
+	measure 'Total Units' = SUM ( Sales[Units] )
+		formatString: #,0
+		displayFolder: 01 Volume & Revenue
+		lineageTag: 69d055ac-b21f-4855-ae4d-c98cde4992b4
+
+	measure 'Total COGS' = SUMX ( Sales, Sales[Units] * RELATED ( Product[Unit Cost] ) )
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: 01 Volume & Revenue
+		lineageTag: 63139d47-fa33-4676-99a9-b83214ef8998
+
+	measure 'Gross Profit' = [Total Revenue] - [Total COGS]
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: 01 Volume & Revenue
+		lineageTag: 12a647e3-12f9-4b2c-b5e5-6fe1dae8dd4c
+
+	measure 'Gross Margin %' = DIVIDE ( [Gross Profit], [Total Revenue] )
+		formatString: 0.0%
+		displayFolder: 01 Volume & Revenue
+		lineageTag: a72e7960-4264-4347-9562-2a2c5e99b9c1
+
+	measure ASP = DIVIDE ( [Total Revenue], [Total Units] )
+		formatString: \$#,0.00
+		displayFolder: 01 Volume & Revenue
+		lineageTag: e40b3ac2-b460-4c07-978b-92ed14e7ad09
+
+	measure 'P&L Value' =
+			SWITCH (
+			SELECTEDVALUE ( 'P&L Stage'[Stage] ),
+			"Revenue", [Total Revenue],
+			"COGS", [Total COGS],
+			"Gross Profit", [Gross Profit],
+			[Total Revenue]
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: 01 Volume & Revenue
+		lineageTag: e93f51f2-db1e-41f7-85d8-d22350d593c9
+
+	measure 'Budget Amount' =
+			CALCULATE (
+			SUM ( BudgetForecast[Amount] ),
+			BudgetForecast[Type] = "Budget",
+			TREATAS ( VALUES ( Product[Category] ), BudgetForecast[Category] ),
+			TREATAS ( VALUES ( Product[Segment] ), BudgetForecast[Segment] ),
+			TREATAS ( VALUES ( 'Date'[Month ID] ), BudgetForecast[Month ID] )
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: 02 Budget & Forecast
+		lineageTag: 6cf922d3-d3c9-4917-9809-dfae35ee5f85
+
+	measure 'Forecast Amount' =
+			CALCULATE (
+			SUM ( BudgetForecast[Amount] ),
+			BudgetForecast[Type] = "Forecast",
+			TREATAS ( VALUES ( Product[Category] ), BudgetForecast[Category] ),
+			TREATAS ( VALUES ( Product[Segment] ), BudgetForecast[Segment] ),
+			TREATAS ( VALUES ( 'Date'[Month ID] ), BudgetForecast[Month ID] )
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: 02 Budget & Forecast
+		lineageTag: 81acc55d-62b4-4aba-ae68-c6b31d438028
+
+	measure 'Budget Attainment %' = DIVIDE ( [Total Revenue], [Budget Amount] )
+		formatString: 0.0%
+		displayFolder: 02 Budget & Forecast
+		lineageTag: 716067f2-9098-491e-a428-117dabf47caf
+
+	measure 'Budget Variance' = [Total Revenue] - [Budget Amount]
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: 02 Budget & Forecast
+		lineageTag: cd375b41-c5d7-492c-b203-a68cf7efbf80
+
+	measure 'Total Customers' = DISTINCTCOUNT ( Sales[Customer ID] )
+		formatString: #,0
+		displayFolder: 03 Customers
+		lineageTag: b784d6ae-3ad1-45a2-b71c-2db4967a161a
+
+	measure 'Total Orders' = DISTINCTCOUNT ( Sales[Order ID] )
+		formatString: #,0
+		displayFolder: 03 Customers
+		lineageTag: b5254250-1ce4-4085-9f89-ba90ef91fa6c
+
+	measure 'New Customers' =
+			CALCULATE (
+			DISTINCTCOUNT ( Customer[Customer ID] ),
+			TREATAS ( VALUES ( 'Date'[Month ID] ), Customer[First Purchase Month ID] )
+			)
+		formatString: #,0
+		displayFolder: 03 Customers
+		lineageTag: 2f4d3b3c-1f97-4d75-82fc-38c605a5202c
+
+	measure 'Returning Customers' = [Total Customers] - [New Customers]
+		formatString: #,0
+		displayFolder: 03 Customers
+		lineageTag: 61b690dd-9428-465c-9881-90f2c03a204d
+
+	measure 'Repeat Purchase Rate %' =
+			VAR RepeatCust =
+			CALCULATE (
+			DISTINCTCOUNT ( Sales[Customer ID] ),
+			FILTER ( VALUES ( Sales[Customer ID] ), CALCULATE ( DISTINCTCOUNT ( Sales[Order ID] ) ) >= 2 )
+			)
+			RETURN
+			DIVIDE ( RepeatCust, [Total Customers] )
+		formatString: 0.0%
+		displayFolder: 03 Customers
+		lineageTag: 400f114e-e114-464b-b72a-5f1bb9d920d9
+
+	measure 'Avg Purchase Frequency' = DIVIDE ( [Total Orders], [Total Customers] )
+		formatString: 0.00
+		displayFolder: 03 Customers
+		lineageTag: 47b02a12-1a91-4fa2-8ede-e1b857888aa3
+
+	measure 'Customer GP Total' = SUM ( Customer[Customer GP] )
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: 03 Customers
+		lineageTag: 47e786f6-5ded-45a3-8915-4920c64de798
+
+	measure '% Gross Profit by Tier' =
+			DIVIDE (
+			[Customer GP Total],
+			CALCULATE ( [Customer GP Total], ALL ( Customer[Customer Tier] ) )
+			)
+		formatString: 0.0%
+		displayFolder: 03 Customers
+		lineageTag: 36ebd354-07f7-44e3-b744-c568b003bc20
+
+	measure 'MoM Revenue Growth %' =
+			VAR Prev = CALCULATE ( [Total Revenue], DATEADD ( 'Date'[Date], -1, MONTH ) )
+			RETURN
+			DIVIDE ( [Total Revenue] - Prev, Prev )
+		formatString: 0.0%
+		displayFolder: 04 Time Intelligence
+		lineageTag: 21882db0-cd78-4acc-bdbd-091a62db4016
+
+	measure 'YoY Revenue Growth %' =
+			VAR PrevYr = CALCULATE ( [Total Revenue], SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
+			RETURN
+			DIVIDE ( [Total Revenue] - PrevYr, PrevYr )
+		formatString: 0.0%
+		displayFolder: 04 Time Intelligence
+		lineageTag: bb9ea115-726c-4262-bc9b-ff745823537b
+
+	measure 'Prior-Year Revenue' = CALCULATE ( [Total Revenue], SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: 04 Time Intelligence
+		lineageTag: 46870ccb-838d-467c-a4dc-f058b9219b55
+
+	column Value
+		lineageTag: 0c5a7b51-45e6-4fa2-ade7-619fb59ff554
+		isNameInferred
+		sourceColumn: [Value]
+
+	partition 'Key Measures' = calculated
+		mode: import
+		source = ROW("Value", BLANK())
+

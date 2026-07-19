@@ -1,0 +1,65 @@
+table Date
+	lineageTag: f4146aea-81dc-4e00-8893-3a799045b9b3
+
+	column Date
+		dataType: dateTime
+		isKey
+		formatString: Long Date
+		lineageTag: ef46326a-1d55-4709-95b6-8677a9921acc
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Month Number'
+		dataType: int64
+		isHidden
+		lineageTag: 5500f923-19d3-4532-95f3-7b97e766d769
+		summarizeBy: none
+		sourceColumn: MonthNo
+
+	column 'Month Name'
+		dataType: string
+		isHidden
+		lineageTag: 15f93b02-d18a-4021-abe3-fb55d5903031
+		summarizeBy: none
+		sourceColumn: MonthName
+
+	column 'Month ID'
+		dataType: int64
+		isHidden
+		lineageTag: 13a70fdc-816a-41ed-b96e-173cbf1a382c
+		summarizeBy: none
+		sourceColumn: MonthID
+
+	column Month
+		dataType: string
+		lineageTag: 6f887fd9-3959-4b3c-9056-cf5235cde2db
+		summarizeBy: none
+		sourceColumn: Month
+		sortByColumn: 'Month ID'
+
+	column Quarter
+		dataType: string
+		lineageTag: 172d60d9-0ab1-4ef8-9a1f-bad623d0ab02
+		summarizeBy: none
+		sourceColumn: Quarter
+
+	column Year
+		dataType: int64
+		lineageTag: 8a409cb2-950b-48c3-be72-58df048d045a
+		summarizeBy: none
+		sourceColumn: Year
+
+	partition Date = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "Date.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"Date", type date}, {"MonthNo", Int64.Type}, {"MonthName", type text}, {"MonthID", Int64.Type}, {"Month", type text}, {"Quarter", type text}, {"Year", Int64.Type}})
+				in
+				    Typed
+
+	annotation PBI_ResultType = Table
+

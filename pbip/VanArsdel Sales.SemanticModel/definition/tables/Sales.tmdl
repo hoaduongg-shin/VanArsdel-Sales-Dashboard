@@ -1,0 +1,59 @@
+table Sales
+	lineageTag: e51ceb0a-b1fa-40db-bfb5-90528c6016fa
+
+	column 'Order ID'
+		dataType: int64
+		isHidden
+		isKey
+		lineageTag: 199449dd-ca03-4965-9358-f28748bebe60
+		summarizeBy: none
+		sourceColumn: OrderID
+
+	column 'Product ID'
+		dataType: string
+		isHidden
+		lineageTag: af8cb49a-13d2-4c97-8843-9a42bb6be431
+		summarizeBy: none
+		sourceColumn: ProductID
+
+	column Date
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: 5633df67-d89f-4553-a37c-884a8e54d01c
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Customer ID'
+		dataType: string
+		isHidden
+		lineageTag: 9734bbba-280e-4247-809e-b3467d36a68b
+		summarizeBy: none
+		sourceColumn: CustomerID
+
+	column 'Campaign ID'
+		dataType: int64
+		isHidden
+		lineageTag: 3b3ca622-22f0-4c30-988e-ae12d2185dd5
+		summarizeBy: none
+		sourceColumn: CampaignID
+
+	column Units
+		dataType: int64
+		formatString: #,0
+		lineageTag: b180e23a-f73c-4012-acde-cfe54f3bbd22
+		summarizeBy: none
+		sourceColumn: Units
+
+	partition Sales = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "Sales.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"OrderID", Int64.Type}, {"ProductID", type text}, {"Date", type date}, {"CustomerID", type text}, {"CampaignID", Int64.Type}, {"Units", Int64.Type}})
+				in
+				    Typed
+

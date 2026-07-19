@@ -1,0 +1,52 @@
+table Geo
+	lineageTag: 29934401-c9f8-4af3-a7f9-2c4c29f48217
+
+	column Zip
+		dataType: string
+		isHidden
+		isKey
+		lineageTag: 19fe8d08-fd1a-4ea4-b362-ac70bd53b6e7
+		summarizeBy: none
+		sourceColumn: Zip
+
+	column City
+		dataType: string
+		lineageTag: 373c430c-4abd-41fe-9372-bf9973bf131f
+		summarizeBy: none
+		sourceColumn: City
+
+	column State
+		dataType: string
+		lineageTag: 2fadbdd3-8926-43ae-a373-351ca000cd6b
+		summarizeBy: none
+		sourceColumn: State
+
+	column Region
+		dataType: string
+		lineageTag: 8f8c133e-a7dd-4fcd-b0b3-91044d3dcd54
+		summarizeBy: none
+		sourceColumn: Region
+
+	column District
+		dataType: string
+		lineageTag: 5ded6b9a-95ea-46ed-9d68-5eff4d376362
+		summarizeBy: none
+		sourceColumn: District
+
+	column Country
+		dataType: string
+		isHidden
+		lineageTag: 036e83b9-fbba-42a6-9475-f620a1f2ca35
+		summarizeBy: none
+		sourceColumn: Country
+
+	partition Geo = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "Geo.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"Zip", type text}, {"City", type text}, {"State", type text}, {"Region", type text}, {"District", type text}, {"Country", type text}})
+				in
+				    Typed
+

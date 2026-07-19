@@ -1,0 +1,8 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "7d48e4e5c1b049c68533",
+  "displayName": "2 — Performance & Geography",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280
+}

@@ -1,0 +1,56 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "a7ee20676eab407ba37b",
+  "position": {
+    "x": 24,
+    "y": 480,
+    "z": 80,
+    "height": 200,
+    "width": 380,
+    "tabOrder": 80
+  },
+  "visual": {
+    "visualType": "funnel",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "P&L Stage"
+                    }
+                  },
+                  "Property": "Stage"
+                }
+              },
+              "queryRef": "P&L Stage.Stage",
+              "nativeQueryRef": "Stage",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Key Measures"
+                    }
+                  },
+                  "Property": "P&L Value"
+                }
+              },
+              "queryRef": "Key Measures.P&L Value",
+              "nativeQueryRef": "P&L Value"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

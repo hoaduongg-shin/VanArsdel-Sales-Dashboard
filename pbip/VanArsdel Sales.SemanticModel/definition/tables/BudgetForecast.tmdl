@@ -1,0 +1,74 @@
+table BudgetForecast
+	lineageTag: a792b8f8-f9aa-493a-83a7-d41bc011aff9
+
+	column Type
+		dataType: string
+		lineageTag: 0b98a7c3-262a-4e0e-b8bf-4f006adc6caa
+		summarizeBy: none
+		sourceColumn: Type
+
+	column Year
+		dataType: int64
+		lineageTag: 5ea09a58-008c-426c-8d8f-44dc66c6fa93
+		summarizeBy: none
+		sourceColumn: Year
+
+	column Month
+		dataType: string
+		lineageTag: c5bc6619-cf91-4d7e-a0c3-f40c48750638
+		summarizeBy: none
+		sourceColumn: Month
+
+	column 'Month No'
+		dataType: int64
+		isHidden
+		lineageTag: 415b9f33-5a8b-46a0-8bc7-e158ef327f6c
+		summarizeBy: none
+		sourceColumn: MonthNo
+
+	column 'Month ID'
+		dataType: int64
+		isHidden
+		lineageTag: f38db987-f5b7-4061-b97c-6b945249e5e6
+		summarizeBy: none
+		sourceColumn: MonthID
+
+	column Category
+		dataType: string
+		isHidden
+		lineageTag: a26aed6e-8097-4af1-8f66-13bb35f9f3c9
+		summarizeBy: none
+		sourceColumn: Category
+
+	column Segment
+		dataType: string
+		isHidden
+		lineageTag: c5b0776e-91d4-4cbd-8c0c-4f126a9ebc6c
+		summarizeBy: none
+		sourceColumn: Segment
+
+	column Category-Segment
+		dataType: string
+		isHidden
+		lineageTag: d359acfd-c96b-42a0-8b35-4781f03b3251
+		summarizeBy: none
+		sourceColumn: Category-Segment
+
+	column Amount
+		dataType: double
+		isHidden
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 8608baad-8696-4988-9d42-a4a6aefa0dc0
+		summarizeBy: none
+		sourceColumn: Amount
+
+	partition BudgetForecast = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "BudgetForecast.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"Type", type text}, {"Year", Int64.Type}, {"Month", type text}, {"MonthNo", Int64.Type}, {"MonthID", Int64.Type}, {"Category", type text}, {"Segment", type text}, {"Category-Segment", type text}, {"Amount", type number}})
+				in
+				    Typed
+

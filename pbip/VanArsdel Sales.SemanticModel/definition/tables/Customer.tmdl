@@ -1,0 +1,77 @@
+table Customer
+	lineageTag: 9968daf6-151d-44fc-9337-e99573b7c182
+
+	column 'Customer ID'
+		dataType: string
+		isHidden
+		isKey
+		lineageTag: e4e17231-609b-4bf7-b061-7554bcd1d458
+		summarizeBy: none
+		sourceColumn: CustomerID
+
+	column 'Zip Code'
+		dataType: string
+		isHidden
+		lineageTag: badf8172-85db-42fa-a569-711060d8d91b
+		summarizeBy: none
+		sourceColumn: ZipCode
+
+	column Email
+		dataType: string
+		lineageTag: d5c6fbf4-1612-4190-9ddb-cd3b2a4a3c60
+		summarizeBy: none
+		sourceColumn: Email
+
+	column 'Customer Name'
+		dataType: string
+		lineageTag: 86a9d388-9a58-4b19-ad0d-5b95acc267df
+		summarizeBy: none
+		sourceColumn: Customer Name
+
+	column 'Email Name (raw)'
+		dataType: string
+		isHidden
+		lineageTag: 43ddea62-611e-49c0-8065-fb25d8952737
+		summarizeBy: none
+		sourceColumn: Email Name (raw)
+
+	column 'First Purchase Date'
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: 206674ea-e59a-4e9f-80cc-2e6c01c06a28
+		summarizeBy: none
+		sourceColumn: FirstPurchaseDate
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'First Purchase Month ID'
+		dataType: int64
+		isHidden
+		lineageTag: 54d601fe-664e-4e5a-bf82-73a45e9f8d7e
+		summarizeBy: none
+		sourceColumn: FirstPurchaseMonthID
+
+	column 'Customer GP'
+		dataType: double
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: c2406cc1-2288-4f70-9024-1153ec36dcbe
+		summarizeBy: none
+		sourceColumn: Customer GP
+
+	column 'Customer Tier'
+		dataType: string
+		lineageTag: 6e953f6b-fce0-47bc-9ed3-222b0de27fbc
+		summarizeBy: none
+		sourceColumn: Customer Tier
+
+	partition Customer = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "Customer.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"CustomerID", type text}, {"ZipCode", type text}, {"Email", type text}, {"Customer Name", type text}, {"Email Name (raw)", type text}, {"FirstPurchaseDate", type date}, {"FirstPurchaseMonthID", Int64.Type}, {"Customer GP", type number}, {"Customer Tier", type text}})
+				in
+				    Typed
+
