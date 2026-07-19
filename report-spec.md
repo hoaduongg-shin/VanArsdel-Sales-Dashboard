@@ -61,7 +61,7 @@
 
 ## Pages
 
-### Page 1 — Overview: Sales & Finance *(spec)*
+### - Page 1 — Overview: Sales & Finance *(spec)*
 KPI cards: Total Revenue, Total COGS, Gross Profit, Budget Attainment % (H1 2020).
 
 Trend: Actual vs Budget vs Forecast revenue — rolling 13 months, anchored on selected period (line); Gross Profit + Gross Margin % — rolling 12 months, Actual only (line, dual axis).
@@ -72,7 +72,7 @@ Detail table: Actual vs Budget by Category-Segment (Actual, Budget, Variance, At
 
 Notes: rolling window adapts to grain (Month → rolling months, Quarter → rolling quarters). Actual (solid) vs Budget (dashed) vs Forecast (dashed, separate) — never blended into one series. "Budget by Region" not buildable (Budget source has no Region field). Region removed from Page 1 filters so Budget Attainment stays comparable.
 
-### Page 2 — Performance & Geography *(spec)*
+### - Page 2 — Performance & Geography *(spec)*
 KPI cards: Total Units Sold, Total Revenue, Average Selling Price per Unit.
 
 Trend: Monthly Revenue; MoM / YoY revenue growth.
@@ -83,7 +83,7 @@ Detail: Regional performance matrix — drill-down Region → District (→ City
 
 Notes: geography reflects customer location (Sales → Customer.ZipCode → Geo). Layout: detail matrix on one half, the two bar charts on the other half.
 
-### Page 3 — Customer & Behavior *(spec)*
+### - Page 3 — Customer & Behavior *(spec)*
 KPI cards: Total Customers, New Customers, Repeat Purchase Rate %, Average Purchase Frequency.
 
 Trend: New vs Returning customers over time (clustered column, monthly).
