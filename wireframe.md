@@ -21,33 +21,33 @@ Low-fidelity layout for the three-page dashboard. Each visual is annotated with 
 **Audience:** CEO / COO · Finance — **X-axis time grain: rolling 13/12 months** (anchored on selected month; adapts to Month/Quarter)
 
 ```
-┌──────────────────────────────────────────────────────────────────────────┐
-│ FILTERS: [Date range] [Anchor month] [Rolling 13m ✓] [Category] [Segment] │
-├──────────────────────────────────────────────────────────────────────────┤
-│ KPI CARDS (value = selected period):                                       │
-│ ┌───────────┐ ┌───────────┐ ┌───────────┐ ┌──────────────────┐            │
-│ │Total      │ │Total      │ │Gross      │ │Budget            │            │
-│ │Revenue    │ │COGS       │ │Profit     │ │Attainment %      │            │
-│ └───────────┘ └───────────┘ └───────────┘ └──────────────────┘            │
-├───────────────────────────────────┬────────────────────────────────────────┤
-│ (1) Actual vs Budget vs Forecast  │ (2) Gross Profit + Gross Margin %       │
-│     LINE                 [vs B/F] │     LINE, dual axis (Actual only)       │
-│     ╱╲╱╲╱╲╱╲ (13 points)          │     bars ▂▅▃▆  ─── margin line          │
-│     X: time, rolling 13 months    │     X: time, rolling 12 months          │
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ FILTERS: [Date range] [Anchor month] [Rolling 13m ✓] [Category] [Segment]    |
+├──────────────────────────────────────────────────────────────────────────────┤
+│ KPI CARDS (value = selected period):                                         │
+│ ┌───────────┐ ┌───────────┐ ┌───────────┐ ┌──────────────────┐               │
+│ │Total      │ │Total      │ │Gross      │ │Budget            │               │
+│ │Revenue    │ │COGS       │ │Profit     │ │Attainment %      │               │
+│ └───────────┘ └───────────┘ └───────────┘ └──────────────────┘               │
+├───────────────────────────────────┬──────────────────────────────────────────┤
+│ (1) Actual vs Budget vs Forecast  │ (2) Gross Profit + Gross Margin %        │
+│     LINE                 [vs B/F] │     LINE, dual axis (Actual only)        │
+│     ╱╲╱╲╱╲╱╲ (13 points)          │     bars ▂▅▃▆  ─── margin line        │
+│     X: time, rolling 13 months    │     X: time, rolling 12 months           │
 │     Y: Revenue · 3 series         │     Y-left: Gross Profit                 │
 │        (Actual/Budget/Forecast)   │     Y-right: Gross Margin %              │
-├───────────────────────────────────┼────────────────────────────────────────┤
-│ (3) Revenue → COGS → Gross Profit │ (4) Budget Attainment % by Category     │
+├───────────────────────────────────┼──────────────────────────────────────────┤
+│ (3) Revenue → COGS → Gross Profit │ (4) Budget Attainment % by Category      │
 │     FUNNEL                        │     COLUMN + LINE            [vs B/F]    │
-│     ▇▇▇▇▇▇  Revenue               │     █ █ ▄ █  ····· 100% target line      │
-│     ▅▅▅▅    COGS                  │     X: Category                          │
-│     ▃▃▃     Gross Profit          │     Y: column = Revenue,                 │
-│     X: stages · Y: value          │        line = Attainment %              │
-├───────────────────────────────────┴────────────────────────────────────────┤
-│ TABLE: Actual vs Budget by Category-Segment                    [vs B/F]     │
-│   Category-Segment | Actual | Budget | Variance | Attainment %              │
-│   (restricted to the comparable period — 2020)                             │
-└──────────────────────────────────────────────────────────────────────────┘
+│     ▇▇▇▇▇▇  Revenue          │     █ █ ▄ █  ····· 100% target line      │
+│     ▅▅▅▅    COGS               │     X: Category                          │
+│     ▃▃▃     Gross Profit        │     Y: column = Revenue,                 │
+│     X: stages · Y: value          │        line = Attainment %               │
+├───────────────────────────────────┴──────────────────────────────────────────┤
+│ TABLE: Actual vs Budget by Category-Segment                    [vs B/F]      │
+│   Category-Segment | Actual | Budget | Variance | Attainment %               │
+│   (restricted to the comparable period — 2020)                               │
+└──────────────────────────────────────────────────────────────────────────────┘
 ```
 Notes: Actual = solid, Budget/Forecast = dashed — never blended into one series. Region is not a
 filter here (Budget has no Region, would break Attainment). Chart (2) is Actual-only (Budget has no cost).
@@ -58,29 +58,29 @@ filter here (Budget has no Region, would break Attainment). Chart (2) is Actual-
 **Audience:** Sales Director · Sales / Regional Manager — **X-axis time grain: Month** (drill to Day)
 
 ```
-┌──────────────────────────────────────────────────────────────────────────┐
-│ FILTERS: [Date range] [Region ▸ District] [Category] [Segment] [Product]  │
-├──────────────────────────────────────────────────────────────────────────┤
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ FILTERS: [Date range] [Region ▸ District] [Category] [Segment] [Product]    │
+├─────────────────────────────────────────────────────────────────────────────┤
 │ KPI CARDS:                                                                  │
-│ ┌───────────────┐ ┌───────────────┐ ┌────────────────────┐                │
-│ │Total Units    │ │Total Revenue  │ │Avg Selling Price   │                │
-│ │Sold           │ │               │ │per Unit (ASP)      │                │
-│ └───────────────┘ └───────────────┘ └────────────────────┘                │
-├─────────────────────────────────┬──────────────────────────────────────────┤
-│ (1) Revenue by Region           │ TABLE: Regional performance (drill-down) │
+│ ┌───────────────┐ ┌───────────────┐ ┌────────────────────┐                  │
+│ │Total Units    │ │Total Revenue  │ │Avg Selling Price   │                  │
+│ │Sold           │ │               │ │per Unit (ASP)      │                  │
+│ └───────────────┘ └───────────────┘ └────────────────────┘                  │
+├─────────────────────────────────┬───────────────────────────────────────────┤
+│ (1) Revenue by Region           │ TABLE: Regional performance (drill-down)  │
 │     BAR                         │   Level (Region▸District▸City)            │
 │     ████████ East               │   | Revenue | Gross Profit | Margin %     │
 │     ██████   Central            │   | Prior-Year Revenue                    │
-│     ████     West               │                                          │
+│     ████     West               │                                           │
 │     X: Revenue · Y: Region      │   ▸ Region                                │
-├─────────────────────────────────┤     ▸ District                           │
+├─────────────────────────────────┤     ▸ District                            │
 │ (2) Top 10 Products by Revenue  │       ▸ City                              │
-│     BAR                         │                                          │
-│     ███████ Product A           │   (geography = customer location:        │
+│     BAR                         │                                           │
+│     ███████ Product A           │   (geography = customer location:         │
 │     █████   Product B           │    Sales → Customer.ZipCode → Geo)        │
-│     X: Revenue · Y: Product     │                                          │
-│     (tie-break: Units, name)    │                                          │
-└─────────────────────────────────┴──────────────────────────────────────────┘
+│     X: Revenue · Y: Product     │                                           │
+│     (tie-break: Units, name)    │                                           │
+└─────────────────────────────────┴───────────────────────────────────────────┘
 ```
 Layout: detail matrix on one half, the two bar charts stacked on the other half.
 
@@ -90,27 +90,27 @@ Layout: detail matrix on one half, the two bar charts stacked on the other half.
 **Audience:** Marketing · Product Development — **X-axis time grain: Month**
 
 ```
-┌──────────────────────────────────────────────────────────────────────────┐
-│ FILTERS: [Date range] [Traffic Channel] [Device]                          │
-├──────────────────────────────────────────────────────────────────────────┤
-│ KPI CARDS:                                                                  │
-│ ┌────────────┐ ┌────────────┐ ┌────────────────┐ ┌────────────────────┐   │
-│ │Total       │ │New         │ │Repeat Purchase │ │Avg Purchase        │   │
-│ │Customers   │ │Customers   │ │Rate %          │ │Frequency           │   │
-│ └────────────┘ └────────────┘ └────────────────┘ └────────────────────┘   │
+┌────────────────────────────────────────────────────────────────────────────┐
+│ FILTERS: [Date range] [Traffic Channel] [Device]                           │
+├────────────────────────────────────────────────────────────────────────────┤
+│ KPI CARDS:                                                                 │
+│ ┌────────────┐ ┌────────────┐ ┌────────────────┐ ┌────────────────────┐    │
+│ │Total       │ │New         │ │Repeat Purchase │ │Avg Purchase        │    │
+│ │Customers   │ │Customers   │ │Rate %          │ │Frequency           │    │
+│ └────────────┘ └────────────┘ └────────────────┘ └────────────────────┘    │
 ├───────────────────────────────────┬────────────────────────────────────────┤
-│ (1) New vs Returning over time    │ (2) Revenue & Orders by Traffic Channel │
-│     CLUSTERED COLUMN              │     CLUSTERED COLUMN, dual axis          │
-│     ▐▌▐▌ ▐▌▐▌ ▐▌▐▌ (New/Ret)     │     █▆▄▂  ─── orders line               │
-│     X: Month                      │     X: Traffic Channel (desc)           │
-│     Y: Customers · 2 groups       │     Y-left: Revenue, Y-right: Orders     │
+│ (1) New vs Returning over time    │ (2) Revenue & Orders by Traffic Channel│
+│     CLUSTERED COLUMN              │     CLUSTERED COLUMN, dual axis        │
+│     ▐▌▐▌ ▐▌▐▌ ▐▌▐▌ (New/Ret)      │     █▆▄▂  ─── orders line            │
+│     X: Month                      │     X: Traffic Channel (desc)          │
+│     Y: Customers · 2 groups       │     Y-left: Revenue, Y-right: Orders   │
 ├───────────────────────────────────┼────────────────────────────────────────┤
-│ (3) Customers by Segment          │ (4) Customer Profitability Tiering      │
-│     BAR                           │     COLUMN / RANKED TABLE               │
-│     ██████ Segment A              │     ████ Top 10%                        │
-│     ████   Segment B              │     ██   Next 20%                       │
-│     X: Customers · Y: Segment     │     ▃    Remaining                      │
-│     (counted per Segment bought)  │     X: tier · Y: % of Gross Profit      │
+│ (3) Customers by Segment          │ (4) Customer Profitability Tiering     │
+│     BAR                           │     COLUMN / RANKED TABLE              │
+│     ██████ Segment A              │     ████ Top 10%                       │
+│     ████   Segment B              │     ██   Next 20%                      │
+│     X: Customers · Y: Segment     │     ▃    Remaining                    │
+│     (counted per Segment bought)  │     X: tier · Y: % of Gross Profit     │
 └───────────────────────────────────┴────────────────────────────────────────┘
 ```
 Notes: Device is a filter, not a chart. A customer who buys multiple Segments is counted in each.
